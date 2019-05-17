@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>大番薯视频</title>
+    <link rel="stylesheet" href="/static/css/danmuplayer.css">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/danmuplayer.js"></script>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            list-style: none;
+            text-decoration:none;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        #danmu_video{
+            width: 100% !important;
+            height: 100% !important;
+        }
+        .vjs-default-skin .vjs-big-play-button {
+            left: 50% !important;
+            top: 50% !important;
+        }
+    </style>
+</head>
+<body>
+<div id="video" data-src="" style="width: 100%;height: 100%; position: absolute;top:0;left:0;"></div>
+<script>
+    window.onload = function(){
+
+        $('#video').danmuplayer({
+            src:"/upload/1.mp4",       //视频源
+        })
+    }
+</script>
+</body>
+</html>

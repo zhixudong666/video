@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>大番薯视频</title>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
+    <script src="/static/js/jquery.js"></script>
+    <style>
+        .man_content{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <!--首页头部-->
+    <div class="layui-header">
+        <div class="layui-logo">大番薯后台管理</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="/static/img/user.jpg" class="layui-nav-img">
+
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item loginout">退了</li>
+        </ul>
+    </div>
+    <!--首页侧导航-->
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">用户管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" data-src="/admin/index/user">用户列表</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;">视频管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" data-src="/admin/index/video">视频列表</a></dd>
+                        <dd><a href="javascript:;" data-src="/admin/index/upload">上传视频</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body" style="padding:0;">
+        <!-- 内容主体区域 -->
+        <div style="padding:15px; width: 100%;height: 100%;box-sizing: border-box;position: relative;">
+            <iframe id="iframe" class="man_content" src="/admin/index/user" frameborder="0">
+            </iframe>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        ©author cainiaodongge
+    </div>
+</div>
+<script src="/static/layui/layui.js"></script>
+<script>
+    //初始化layui
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+    //点击切换
+    $("a[data-src]").click(function(){
+        let src = $(this).attr('data-src');
+        $("#iframe").attr('src',src);
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{$title}</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css" media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+</head>
+<body>
+
+<table id="video" lay-filter="test"></table>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="/static/js/jquery.js"></script>
+<script src="../../static/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use(['laydate', 'laypage', 'layer', 'table', 'carousel', 'upload', 'element', 'slider'], function () {
+        var laydate = layui.laydate //日期
+            , laypage = layui.laypage //分页
+            , layer = layui.layer //弹层
+            , table = layui.table //表格
+            , carousel = layui.carousel //轮播
+            , upload = layui.upload //上传
+            , element = layui.element //元素操作
+            , slider = layui.slider;//滑块
+        //执行一个 table 实例
+        table.render({
+            elem: '#video'
+            , url: '/api/admin/dataList' //数据接口
+            , title: '视频列表'
+            , page: true //开启分页
+            , toolbar: 'false' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            , totalRow: true //开启合计行
+            , cols: [[
+                {field: 'id', title: 'ID', sort: true, fixed: 'left', width: 80},
+                {field: 'name', title: '视频名称'},
+                {field: 'desc', title: '视频描述'},
+                {field: 'src', title: '视频地址'},
+                {fixed: 'right',title:'操作', width: 200, align: 'center', toolbar: '#barDemo'}
+            ]]
+        });
+        //监听行工具事件
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+            var tr = obj.tr;
+            if(layEvent == 'del')
+            {
+                layer.confirm('确定要删除吗？',function(index){
+                    var id = data.id;
+                    obj.del();
+                    layer.close(index);
+                    //向服务器发送请求
+                    $.ajax({
+                        url:'/api/video/del',
+                        data:{
+                            id:id
+                        },
+                        success:function(res){
+                            if(res.code == 0)
+                            {
+                                layer.msg('删除成功');
+                            }else{
+                                layer.msg('操作失败');
+                            }
+                        },
+                        error:function(err){
+                            console.log(err);
+                        }
+                    })
+                })
+            }
+        });
+    });
+
+
+</script>
+
+
+</body>
+</html>
